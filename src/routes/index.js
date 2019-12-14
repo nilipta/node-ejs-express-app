@@ -5,7 +5,7 @@ const uuid = require('uuid/v4');
 
 let books=[];
 try{
-    const readBookJson = fs.readFileSync('/tmp/books.json', 'utf-8');
+    const readBookJson = fs.readFileSync('./../books.json', 'utf-8');
     books=JSON.parse(readBookJson);
 }
 catch(e)
@@ -39,7 +39,7 @@ router.post('/new-entry', (req, res) => {
     books.push(newBook);
 
     const json_books = JSON.stringify(books);
-    fs.writeFileSync('/tmp/books.json', json_books, 'utf-8');
+    fs.writeFileSync('./../books.json', json_books, 'utf-8');
 
     res.redirect('/');
 })
@@ -47,7 +47,7 @@ router.post('/new-entry', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     books = books.filter(book => { book.id !== req.param.id})
     const json_books = JSON.stringify(books);
-    fs.writeFileSync('/tmp/books.json', json_books, 'utf-8');
+    fs.writeFileSync('./../books.json', json_books, 'utf-8');
     res.redirect('/');
 })
 
